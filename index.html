@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tushar Mishra — Full-Stack Developer</title>
+  <meta name="description" content="Tushar Mishra is a full-stack developer building backend systems, real-time products, and AI-powered developer tools.">
+  <meta property="og:title" content="Tushar Mishra — Full-Stack Developer">
+  <meta property="og:description" content="Backend-minded full-stack developer for ambitious products and engineering teams.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f2f0e8;
+      --ink: #11110f;
+      --muted: #66645b;
+      --line: #11110f;
+      --acid: #d8ff3e;
+      --orange: #ff6038;
+      --blue: #8bd7ff;
+      --pad: clamp(18px, 4vw, 64px);
+      color-scheme: light;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 74px; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.55 "Space Grotesk", Arial, sans-serif; }
+    body::selection { background: var(--ink); color: var(--acid); }
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
+    .mono, .eyebrow, .stamp, .meta, .tag, .ticker, .nav-index, .terminal, .skill-title { font-family: "DM Mono", monospace; }
+    .wrap { width: min(1400px, 100%); margin: 0 auto; padding-inline: var(--pad); }
+    .eyebrow { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; font-weight: 500; }
+    .eyebrow::before { content: "↳ "; color: var(--orange); }
+    .progress { position: fixed; inset: 0 0 auto; height: 7px; background: var(--orange); transform: scaleX(0); transform-origin: left; z-index: 50; }
+
+    header { position: sticky; top: 0; z-index: 40; background: var(--paper); border-bottom: 3px solid var(--ink); }
+    nav { min-height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 700; letter-spacing: -.04em; }
+    .brand-mark { display: grid; place-items: center; width: 39px; height: 39px; background: var(--ink); color: var(--acid); border: 2px solid var(--ink); font: 500 13px "DM Mono", monospace; }
+    .nav-links { display: flex; align-items: center; gap: clamp(14px, 2.5vw, 34px); }
+    .nav-links a { text-decoration: none; font: 12px "DM Mono", monospace; text-transform: uppercase; }
+    .nav-links a:hover { background: var(--acid); }
+    .nav-links .nav-cta { background: var(--ink); color: var(--paper); padding: 12px 14px; }
+    .nav-links .nav-cta:hover { background: var(--orange); color: var(--ink); }
+    .menu { display: none; border: 2px solid var(--ink); background: transparent; padding: 10px 12px; font: 12px "DM Mono", monospace; text-transform: uppercase; }
+
+    .hero { padding: clamp(54px, 9vw, 130px) 0 70px; border-bottom: 3px solid var(--ink); overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.24fr) minmax(300px, .76fr); gap: clamp(35px, 7vw, 120px); align-items: end; }
+    .hero h1 { max-width: 900px; margin: 20px 0 24px; font-size: clamp(62px, 11vw, 170px); line-height: .83; letter-spacing: -.095em; font-weight: 700; }
+    .hero h1 span { color: var(--orange); display: block; }
+    .hero-copy { max-width: 580px; color: #34332e; font-size: clamp(18px, 2vw, 23px); line-height: 1.35; }
+    .hero-side { display: grid; gap: 18px; }
+    .stamp { border: 3px solid var(--ink); background: var(--acid); padding: 14px 16px; font-size: 13px; line-height: 1.4; box-shadow: 8px 8px 0 var(--ink); }
+    .stamp strong { display: block; font: 500 17px "Space Grotesk", sans-serif; text-transform: uppercase; }
+    .stamp strong::before { content: "● "; color: var(--orange); }
+    .terminal { background: var(--ink); color: var(--paper); border: 3px solid var(--ink); padding: 19px; min-height: 226px; font-size: 13px; line-height: 1.8; box-shadow: 8px 8px 0 var(--orange); }
+    .terminal .bar { color: var(--acid); margin-bottom: 17px; }
+    .terminal .bar span { color: var(--paper); }
+    .terminal .green { color: var(--acid); }
+    .terminal .orange { color: var(--orange); }
+    .terminal .cursor { display: inline-block; width: 8px; height: 15px; background: var(--acid); vertical-align: -2px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; border: 3px solid var(--ink); padding: 10px 17px; text-decoration: none; text-transform: uppercase; font: 500 12px "DM Mono", monospace; cursor: pointer; background: transparent; transition: transform .15s, box-shadow .15s, background .15s; }
+    .button:hover { transform: translate(-4px, -4px); box-shadow: 5px 5px 0 var(--ink); }
+    .button.primary { background: var(--ink); color: var(--paper); }
+    .button.primary:hover { background: var(--orange); color: var(--ink); }
+    .button.lime { background: var(--acid); }
+    .socials { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 20px; font: 12px "DM Mono", monospace; text-transform: uppercase; }
+    .socials a { text-decoration: none; border-bottom: 2px solid var(--ink); }
+    .socials a:hover { color: var(--orange); border-color: var(--orange); }
+    .ticker { display: flex; gap: 28px; overflow: hidden; white-space: nowrap; background: var(--orange); border-bottom: 3px solid var(--ink); padding: 12px var(--pad); font-size: 12px; text-transform: uppercase; }
+    .ticker span::after { content: "✳"; margin-left: 28px; }
+
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 3px solid var(--ink); }
+    .stat { min-height: 160px; padding: 26px var(--pad); border-right: 3px solid var(--ink); }
+    .stat:last-child { border-right: 0; }
+    .stat b { display: block; font-size: clamp(42px, 6vw, 82px); line-height: .9; letter-spacing: -.08em; }
+    .stat:nth-child(2) { background: var(--acid); }
+    .stat:nth-child(3) { background: var(--blue); }
+    .stat span { display: block; max-width: 170px; margin-top: 17px; font: 12px "DM Mono", monospace; text-transform: uppercase; }
+
+    section { padding: clamp(70px, 10vw, 145px) 0; border-bottom: 3px solid var(--ink); }
+    .section-head { display: grid; grid-template-columns: 1fr 2fr; gap: 28px; margin-bottom: 52px; }
+    .section-head h2 { max-width: 530px; margin: 0; font-size: clamp(48px, 7vw, 100px); line-height: .86; letter-spacing: -.09em; }
+    .section-intro { max-width: 650px; align-self: end; font-size: clamp(18px, 2.2vw, 27px); line-height: 1.2; }
+    .section-intro p { margin: 0; }
+    .about-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 3px; background: var(--ink); border: 3px solid var(--ink); }
+    .about-main, .service-card { background: var(--paper); padding: clamp(25px, 4vw, 52px); }
+    .about-main p { max-width: 680px; margin: 0 0 22px; font-size: clamp(18px, 2.2vw, 27px); line-height: 1.25; }
+    .about-main p:last-child { margin-bottom: 0; color: var(--muted); font-size: 17px; }
+    .services { display: grid; gap: 3px; background: var(--ink); }
+    .service-card { padding: 25px; }
+    .service-card:nth-child(1) { background: var(--acid); }
+    .service-card:nth-child(2) { background: var(--blue); }
+    .service-card:nth-child(3) { background: var(--orange); }
+    .service-card h3 { margin: 0 0 28px; font-size: 21px; line-height: 1; text-transform: uppercase; }
+    .service-card p { margin: 0; font-size: 14px; }
+
+    .project-list { display: grid; gap: 38px; }
+    .project { border: 3px solid var(--ink); background: var(--ink); display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr); box-shadow: 10px 10px 0 var(--ink); }
+    .project:nth-child(even) { box-shadow: -10px 10px 0 var(--ink); }
+    .project-info { background: var(--paper); padding: clamp(25px, 4vw, 48px); }
+    .project:nth-child(1) .project-info { background: var(--acid); }
+    .project:nth-child(2) .project-info { background: var(--blue); }
+    .project:nth-child(3) .project-info { background: var(--orange); }
+    .project-number { display: flex; justify-content: space-between; margin-bottom: 65px; font: 12px "DM Mono", monospace; }
+    .project h3 { margin: 0; font-size: clamp(40px, 5vw, 70px); line-height: .88; letter-spacing: -.08em; }
+    .project .tag { max-width: 430px; margin: 20px 0; font-size: 15px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 7px; list-style: none; padding: 0; margin: 25px 0 0; }
+    .chips li { border: 2px solid var(--ink); padding: 5px 9px; font: 11px "DM Mono", monospace; text-transform: uppercase; }
+    .project-visual { display: flex; align-items: center; padding: clamp(22px, 4vw, 50px); background: var(--ink); color: var(--paper); min-height: 330px; }
+    .project-visual .terminal { width: 100%; min-height: 0; padding: 17px; border-color: var(--paper); box-shadow: 7px 7px 0 var(--orange); }
+    .codebox { width: 100%; border: 2px solid var(--paper); padding: 15px; font: 12px/1.9 "DM Mono", monospace; }
+    .codebox .line { display: flex; gap: 15px; }
+    .codebox .line i { color: #777; font-style: normal; width: 12px; text-align: right; }
+    .codebox .lime { color: var(--acid); }
+    .codebox .blue { color: var(--blue); }
+    .dashboard { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+    .dash-cell { border: 2px solid var(--paper); padding: 15px 11px; font: 11px "DM Mono", monospace; }
+    .dash-cell strong { display: block; margin-bottom: 18px; font-size: 12px; }
+    .dash-bar { height: 13px; background: #444; }
+    .dash-bar i { display: block; height: 100%; background: var(--acid); }
+    .project-details { grid-column: 1 / -1; background: var(--paper); color: var(--ink); }
+    details { border-top: 3px solid var(--ink); }
+    summary { cursor: pointer; padding: 16px 25px; list-style: none; font: 12px "DM Mono", monospace; text-transform: uppercase; }
+    summary::after { content: "+"; float: right; font-size: 20px; line-height: .6; }
+    details[open] summary::after { content: "×"; }
+    summary::-webkit-details-marker { display: none; }
+    .project-points { margin: 0; padding: 0 45px 23px 45px; columns: 2; color: #4b4942; font-size: 14px; }
+    .project-points li { margin: 7px 0; break-inside: avoid; }
+    .project-links { display: flex; flex-wrap: wrap; gap: 19px; padding: 0 25px 23px; }
+    .project-links a { font: 12px "DM Mono", monospace; text-transform: uppercase; text-decoration: none; border-bottom: 2px solid var(--ink); }
+    .project-links a:hover { color: var(--orange); }
+
+    .experience-grid, .education-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 3px; background: var(--ink); border: 3px solid var(--ink); }
+    .experience-main, .education-main, .education-side { background: var(--paper); padding: clamp(25px, 4vw, 50px); }
+    .experience-main { background: var(--blue); }
+    .role { display: flex; justify-content: space-between; gap: 20px; border-bottom: 3px solid var(--ink); padding-bottom: 20px; margin-bottom: 25px; }
+    .role h3 { margin: 0; font-size: clamp(28px, 4vw, 48px); line-height: .9; letter-spacing: -.07em; }
+    .role .meta { font-size: 11px; text-align: right; max-width: 180px; }
+    .experience-main ul { padding-left: 20px; margin: 0; max-width: 650px; }
+    .experience-main li { margin: 10px 0; }
+    .interest-list { list-style: none; padding: 0; margin: 0; }
+    .interest-list li { padding: 13px 0; border-bottom: 2px solid var(--ink); font-size: 15px; }
+    .interest-list li::before { content: "[+] "; font: 12px "DM Mono", monospace; color: var(--orange); }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; background: var(--ink); border: 3px solid var(--ink); }
+    .skill-group { min-height: 190px; background: var(--paper); padding: 24px; }
+    .skill-group:nth-child(3n + 1) { background: var(--acid); }
+    .skill-group:nth-child(3n + 2) { background: var(--blue); }
+    .skill-title { margin: 0 0 30px; font-size: 12px; text-transform: uppercase; }
+    .skill-group .chips { margin: 0; }
+    .skill-group .chips li { border-color: var(--ink); }
+    .education-main h3 { max-width: 500px; margin: 0 0 18px; font-size: clamp(30px, 4vw, 54px); line-height: .9; letter-spacing: -.07em; }
+    .education-main p, .education-side p { margin: 0; font: 14px/1.7 "DM Mono", monospace; }
+    .education-side { background: var(--orange); }
+
+    #contact { background: var(--ink); color: var(--paper); border-bottom: 0; }
+    #contact .eyebrow { color: var(--acid); }
+    #contact h2 { max-width: 1000px; margin: 22px 0; font-size: clamp(58px, 10vw, 150px); line-height: .82; letter-spacing: -.1em; }
+    #contact h2 span { color: var(--acid); }
+    #contact .contact-copy { max-width: 590px; font-size: 19px; color: #c8c6bd; }
+    #contact .button { border-color: var(--paper); }
+    #contact .button.primary { background: var(--acid); border-color: var(--acid); color: var(--ink); }
+    #contact .button:hover { box-shadow: 5px 5px 0 var(--acid); }
+    footer { background: var(--acid); border-top: 3px solid var(--ink); padding: 24px 0; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 15px; font: 12px "DM Mono", monospace; text-transform: uppercase; }
+    footer a { text-decoration: none; border-bottom: 2px solid var(--ink); }
+
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } .reveal { opacity: 1; transform: none; } }
+    @media (max-width: 850px) {
+      .nav-links { display: none; position: absolute; top: 70px; left: 0; right: 0; flex-direction: column; align-items: stretch; padding: 18px var(--pad) 24px; background: var(--paper); border-bottom: 3px solid var(--ink); }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 8px 0; }
+      .nav-links .nav-cta { text-align: center; }
+      .menu { display: block; }
+      .hero-grid, .about-grid, .experience-grid, .education-grid { grid-template-columns: 1fr; }
+      .section-head { grid-template-columns: 1fr; gap: 25px; }
+      .project { grid-template-columns: 1fr; }
+      .project:nth-child(even) { box-shadow: 10px 10px 0 var(--ink); }
+      .project-visual { min-height: 250px; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .hero h1 { font-size: clamp(58px, 18vw, 94px); }
+      .hero-side { margin-top: 25px; }
+      .stats { grid-template-columns: 1fr; }
+      .stat { min-height: 0; border-right: 0; border-bottom: 3px solid var(--ink); display: flex; align-items: baseline; gap: 18px; }
+      .stat:last-child { border-bottom: 0; }
+      .stat span { margin-top: 0; }
+      .project-points { columns: 1; padding-inline: 35px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .role { display: block; }
+      .role .meta { text-align: left; margin-top: 12px; }
+      footer .wrap { display: block; }
+      footer a { display: inline-block; margin-top: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <header>
+    <div class="wrap">
+      <nav aria-label="Primary navigation">
+        <a class="brand" href="#top" aria-label="Tushar Mishra home"><span class="brand-mark">TM</span><span>TUSHAR / MISHRA</span></a>
+        <button class="menu" id="menu" aria-expanded="false" aria-controls="navLinks">Menu</button>
+        <div class="nav-links" id="navLinks">
+          <a href="#about">About</a><a href="#projects">Work</a><a href="#experience">Experience</a><a href="#skills">Stack</a><a href="#contact" class="nav-cta">Start a conversation ↗</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Full-stack developer / Delhi, India</div>
+          <h1>MAKE IT<br><span>WORK.</span></h1>
+          <p class="hero-copy">I build useful software for people who care about the details — from dependable APIs and real-time products to AI tools that make developers faster.</p>
+          <div class="hero-actions"><a class="button primary" href="#projects">See selected work ↓</a><a class="button lime" data-resume href="#">Open resume ↗</a></div>
+          <div class="socials"><a data-l="github" href="#">GitHub</a><a data-l="linkedin" href="#">LinkedIn</a><a data-l="mail" href="#">Email</a><a data-l="phone" href="#">Call</a></div>
+        </div>
+        <div class="hero-side">
+          <div class="stamp"><strong>Available for good work</strong>Open to software engineering opportunities, freelance builds, and interesting technical problems.</div>
+          <div class="terminal" aria-label="Terminal showing developer profile"><div class="bar">tushar@portfolio:~$ <span>whoami</span></div><div id="terminalText"></div><span class="cursor" aria-hidden="true"></span></div>
+        </div>
+      </div>
+    </section>
+    <div class="ticker" aria-hidden="true"><span>Backend systems</span><span>Real-time applications</span><span>AI developer tools</span><span>Product-minded engineering</span></div>
+
+    <div class="stats" aria-label="Highlights">
+      <div class="stat reveal"><b>600+</b><span>DSA problems solved</span></div>
+      <div class="stat reveal"><b>8.65</b><span>CGPA / 10 at MAIT</span></div>
+      <div class="stat reveal"><b>10+</b><span>simultaneous collaborators supported</span></div>
+    </div>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head"><div><div class="eyebrow">01 / the short version</div><h2>THE<br>HUMAN<br>BIT.</h2></div><div class="section-intro"><p>Backend-minded full-stack developer. B.Tech IT student. Curious about how products hold together when real people start using them.</p></div></div>
+        <div class="about-grid reveal">
+          <div class="about-main"><p>I like the part of a product users never see: the API contracts, data model, access rules, and systems that keep everything consistent.</p><p>I work with React, Next.js, Node.js, Express.js, MongoDB, and PostgreSQL. I’ve shipped a published CLI, a real-time collaborative editor, and a role-based business platform.</p></div>
+          <div class="services">
+            <div class="service-card"><h3>For teams</h3><p>Ship clean features, untangle backend complexity, and contribute quickly inside an engineering workflow.</p></div>
+            <div class="service-card"><h3>For founders</h3><p>Turn a rough product idea into a working full-stack build with clear architecture and room to grow.</p></div>
+            <div class="service-card"><h3>For humans</h3><p>Communicate clearly, document decisions, and leave codebases easier to understand than I found them.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="wrap">
+        <div class="section-head"><div><div class="eyebrow">02 / selected work</div><h2>BUILT.<br>TESTED.<br>SHIPPED.</h2></div><div class="section-intro"><p>Three projects that show how I think: useful interfaces on top, serious engineering underneath.</p></div></div>
+        <div class="project-list" id="projectList"></div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="wrap">
+        <div class="section-head"><div><div class="eyebrow">03 / proof of work</div><h2>ON THE<br>JOB.</h2></div><div class="section-intro"><p>Shipping features with a team taught me that good engineering is as much about collaboration as implementation.</p></div></div>
+        <div class="experience-grid reveal">
+          <div class="experience-main"><div class="role"><h3>CommuSync</h3><div class="meta">FULL STACK DEVELOPER INTERN<br>JUN — AUG 2026<br>QUALIFIRE</div></div><ul><li>Built and maintained RESTful APIs for candidate management, profile updates, and resume uploads.</li><li>Implemented secure PDF/DOCX uploads with Cloudinary and database integration.</li><li>Developed backend features with Node.js, Express.js, MongoDB, and TypeScript.</li><li>Worked in a modular route / controller / service architecture.</li><li>Collaborated in Agile ceremonies, code reviews, and API documentation.</li></ul><ul class="chips"><li>Node.js</li><li>Express.js</li><li>MongoDB</li><li>TypeScript</li><li>Cloudinary</li><li>Git</li></ul></div>
+          <div class="about-main"><div class="eyebrow">What I keep coming back to</div><ul class="interest-list" id="interests"></ul></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="wrap">
+        <div class="section-head"><div><div class="eyebrow">04 / working toolkit</div><h2>THE<br>STACK.</h2></div><div class="section-intro"><p>Tools are interchangeable. Strong fundamentals, thoughtful trade-offs, and the ability to learn are the real stack.</p></div></div>
+        <div class="skills-grid reveal" id="skillList"></div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="wrap">
+        <div class="section-head"><div><div class="eyebrow">05 / foundation</div><h2>STILL<br>LEARNING.</h2></div><div class="section-intro"><p>School gave me the theory. Projects and production work keep forcing me to make it useful.</p></div></div>
+        <div class="education-grid reveal"><div class="education-main"><h3>Maharaja Agrasen Institute of Technology (MAIT), GGSIPU</h3><p>B.Tech in Information Technology<br>AUGUST 2023 — JUNE 2027<br>CGPA: 8.65 / 10</p></div><div class="education-side"><div class="eyebrow">Problem solving</div><p style="margin-top:28px;font-size:21px;line-height:1.25">600+ DSA problems solved across LeetCode and GeeksforGeeks.</p><div class="hero-actions"><a class="button" data-l="leetcode" href="#">LeetCode ↗</a><a class="button" data-l="gfg" href="#">GFG ↗</a></div></div></div>
+      </div>
+    </section>
+
+    <section id="contact"><div class="wrap"><div class="eyebrow">06 / your move</div><h2>HAVE A<br><span>PROBLEM?</span></h2><p class="contact-copy">I’m open to software engineering opportunities, developer tools, and freelance projects where thoughtful engineering can make a visible difference.</p><div class="hero-actions"><a class="button primary" data-l="mail" href="#"><span data-email></span> ↗</a><a class="button" data-l="phone" href="#">Call me ↗</a><a class="button" data-resume href="#">Resume ↗</a></div></div></section>
+  </main>
+  <footer><div class="wrap"><span>© 2026 Tushar Mishra / Built with intent.</span><a href="#top">Back to top ↑</a></div></footer>
+
+  <script>
+    const CONFIG = {
+      resume: "https://drive.google.com/file/d/1afbdAlD8k66TfOKepqivcg8QgC_avrLh/view?usp=drive_link",
+      email: "tusharmishra6666@gmail.com", phone: "+919319390631",
+      links: { github: "https://github.com/cout-Tushar", linkedin: "https://linkedin.com/in/tushar-mishra-1b15701ab", leetcode: "#", gfg: "#" },
+      terminal: ["$ profile --load", "", "name     Tushar Mishra", "focus    backend + real-time systems", "status   available for good work", "", "✓ ready to build something useful"],
+      interests: ["Backend development and REST API design", "Real-time systems using WebSockets", "AI-powered developer tools", "Authentication and access control", "Database design and software architecture", "Data structures and algorithmic problem-solving"],
+      skills: { "Languages": ["JavaScript", "TypeScript", "Python", "C++", "C", "SQL", "HTML5", "CSS3"], "Frontend": ["React.js", "Next.js", "Redux", "Tailwind CSS", "Material UI", "Responsive Design"], "Backend + APIs": ["Node.js", "Express.js", "REST APIs", "Socket.io", "WebSockets", "JWT Authentication", "RBAC", "LLM API Integration"], "Databases": ["PostgreSQL", "MongoDB", "MySQL", "MariaDB", "Prisma ORM", "Database Design", "Query Optimization"], "DevOps + Tools": ["Docker", "Git", "GitHub", "npm", "Vercel", "Postman", "VS Code", "Cloudinary"], "Core Concepts": ["Data Structures and Algorithms", "OOP", "DBMS", "Operating Systems", "Computer Networks", "SOLID Principles", "Design Patterns"] },
+      projects: [
+        { name: "Hammy CLI", cat: "01 / AI-powered developer tool", tag: "Test, generate, and understand APIs directly from your terminal.", tech: ["TypeScript", "Node.js", "REST APIs", "Groq API", "CLI"], points: ["Developed and published an AI-powered CLI for API testing, request generation, API review, and response explanation.", "Implemented HTTP request execution and persistent local storage for saved requests and collections.", "Integrated the Groq API to generate and review API requests and explain responses.", "Designed a modular TypeScript architecture and published an npm package for global installation."], links: [["GitHub repository", "https://github.com/cout-Tushar/Hammy"]], visual: "terminal" },
+        { name: "Co-Op Code", cat: "02 / Real-time collaborative application", tag: "A collaborative coding environment built for synchronized development.", tech: ["Next.js", "React", "Express.js", "Socket.io", "MongoDB", "JWT"], points: ["Real-time collaborative code editing with live code synchronization.", "WebSocket architecture supporting 10+ simultaneous users.", "Secure JWT authentication, password hashing, session management, login, signup, and password reset.", "REST APIs with Express.js and MongoDB for user management and persistent data.", "Full-stack deployment on Vercel with sub-200ms response times."], links: [["GitHub repository", "https://github.com/cout-Tushar/CO-OP-Code"], ["Live demo", "https://co-op-code.vercel.app/"]], visual: "code" },
+        { name: "BuildCore ERP", cat: "03 / Full-stack business application", tag: "Bringing construction-site operations into one connected platform.", tech: ["Next.js", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL", "Prisma"], points: ["Role-based access control for administrators, supervisors, and engineers.", "Construction site management, workforce and attendance tracking.", "Daily progress, work status, inventory, and material request reporting.", "Document uploads with cloud storage behind protected backend APIs."], links: [["Live demo", "https://constucton-site-management.vercel.app/"]], visual: "dashboard" }
+      ]
+    };
+    const $ = (selector) => document.querySelector(selector);
+    const $$ = (selector) => [...document.querySelectorAll(selector)];
+    const esc = (value) => String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[char]));
+    const safeUrl = (value) => { try { const url = new URL(value, location.href); return ["https:", "http:", "mailto:", "tel:"].includes(url.protocol) && (url.protocol === "mailto:" || url.protocol === "tel:" || url.origin !== location.origin) ? esc(value) : ""; } catch { return ""; } };
+
+    const visual = {
+      terminal: `<div class="terminal"><div class="bar">hammy:~$ <span>hammy request</span></div><div><span class="orange">✓</span> request sent</div><div>status&nbsp;&nbsp; 200 OK</div><div>saved&nbsp;&nbsp;&nbsp; collection: users-api</div><div><span class="green">AI</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Explain this response…</div></div>`,
+      code: `<div class="codebox"><div class="line"><i>1</i><span><span class="blue">function</span> sync(doc) {</span></div><div class="line"><i>2</i><span>&nbsp;&nbsp;socket.emit(<span class="lime">"edit"</span>, doc);</span></div><div class="line"><i>3</i><span>&nbsp;&nbsp;<span class="blue">return</span> doc;</span></div><div class="line"><i>4</i><span>}</span></div></div>`,
+      dashboard: `<div class="dashboard"><div class="dash-cell"><strong>SITE PROGRESS</strong><div class="dash-bar"><i style="width:64%"></i></div></div><div class="dash-cell"><strong>WORK STATUS</strong><div class="dash-bar"><i style="width:40%"></i></div></div><div class="dash-cell"><strong>INVENTORY</strong><div class="dash-bar"><i style="width:78%"></i></div></div><div class="dash-cell"><strong>ATTENDANCE</strong><div class="dash-bar"><i style="width:55%"></i></div></div></div>`
+    };
+    $("#terminalText").innerHTML = CONFIG.terminal.map((line, index) => `<div class="${index === 1 || index === 6 ? "green" : index === 0 ? "orange" : ""}">${esc(line) || "&nbsp;"}</div>`).join("");
+    $("#interests").innerHTML = CONFIG.interests.map((item) => `<li>${esc(item)}</li>`).join("");
+    $("#skillList").innerHTML = Object.entries(CONFIG.skills).map(([name, items]) => `<div class="skill-group"><h3 class="skill-title">${esc(name)}</h3><ul class="chips">${items.map((item) => `<li>${esc(item)}</li>`).join("")}</ul></div>`).join("");
+    $("#projectList").innerHTML = CONFIG.projects.map((project) => `<article class="project reveal"><div class="project-info"><div class="project-number"><span>${esc(project.cat)}</span><span>↘</span></div><h3>${esc(project.name)}</h3><p class="tag">${esc(project.tag)}</p><ul class="chips">${project.tech.map((item) => `<li>${esc(item)}</li>`).join("")}</ul></div><div class="project-visual">${visual[project.visual]}</div><div class="project-details"><details><summary>Engineering contributions</summary><ul class="project-points">${project.points.map((point) => `<li>${esc(point)}</li>`).join("")}</ul></details>${project.links.length ? `<div class="project-links">${project.links.map(([name, url]) => `<a href="${safeUrl(url)}" target="_blank" rel="noopener">${esc(name)} ↗</a>`).join("")}</div>` : ""}</div></article>`).join("");
+    $$('[data-resume]').forEach((link) => { const url = safeUrl(CONFIG.resume); if (url) { link.href = url; link.target = "_blank"; link.rel = "noopener noreferrer"; } else link.hidden = true; });
+    $$('[data-l]').forEach((link) => { const key = link.dataset.l; const raw = key === "mail" ? `mailto:${CONFIG.email}` : key === "phone" ? `tel:${CONFIG.phone}` : CONFIG.links[key]; const url = safeUrl(raw); if (url) { link.href = url; if (key !== "mail" && key !== "phone") { link.target = "_blank"; link.rel = "noopener noreferrer"; } } else link.hidden = true; });
+    $$('[data-email]').forEach((item) => item.textContent = CONFIG.email);
+
+    const menu = $("#menu"), navLinks = $("#navLinks");
+    menu.addEventListener("click", () => { const open = navLinks.classList.toggle("open"); menu.setAttribute("aria-expanded", String(open)); });
+    navLinks.addEventListener("click", (event) => { if (event.target.tagName === "A") { navLinks.classList.remove("open"); menu.setAttribute("aria-expanded", "false"); } });
+    addEventListener("keydown", (event) => { if (event.key === "Escape") { navLinks.classList.remove("open"); menu.setAttribute("aria-expanded", "false"); } });
+    addEventListener("scroll", () => { $("#progress").style.transform = `scaleX(${scrollY / Math.max(1, document.body.scrollHeight - innerHeight)})`; }, { passive: true });
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) { entry.target.classList.add("visible"); observer.unobserve(entry.target); } }), { threshold: .12 });
+    $$(".reveal").forEach((item) => observer.observe(item));
+  </script>
+</body>
+</html>

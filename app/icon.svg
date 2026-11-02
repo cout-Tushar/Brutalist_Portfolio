@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>TM monogram</title>
+  <rect width="64" height="64" fill="#11110f"/>
+  <rect x="5" y="5" width="54" height="54" fill="#d8ff3e" stroke="#11110f" stroke-width="4"/>
+  <path d="M11 16h25v7h-9v25h-8V23h-8z" fill="#11110f"/>
+  <path d="M36 16h8l5 12 5-12h1v32h-8V30l-5 11-6-11z" fill="#ff6038"/>
+  <path d="M8 53h48" stroke="#11110f" stroke-width="4"/>
+</svg>
