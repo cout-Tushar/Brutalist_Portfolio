@@ -5,3 +5,7 @@ out/
 *.tsbuildinfo
 .env*
 !.env.example
+
+# Local browser verification output
+test-results/
+playwright-report/
