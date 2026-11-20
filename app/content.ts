@@ -125,4 +125,17 @@ export const projects = [
     links: [["Live demo", "https://constucton-site-management.vercel.app/"]],
     visual: "dashboard",
   },
+  {
+    name: "Distributed Task Scheduler & Job Queue Engine",
+    category: "04 / Distributed systems",
+    tag: "A browser console for submitting jobs, inspecting attempt history, and replaying dead-lettered jobs.",
+    tech: ["TypeScript", "Node.js", "Express", "PostgreSQL", "Redis", "BullMQ", "Docker Compose"],
+    points: [
+      "Built an asynchronous job processing system with independently scalable workers for PDF generation, email processing, and video transcoding. Created a browser console to submit jobs, inspect attempt history, and replay dead-lettered jobs.",
+      "Designed a PostgreSQL transactional outbox to preserve accepted jobs during Redis outages. Added idempotency keys so concurrent submissions with the same key and payload return one job ID.",
+      "Implemented exponential backoff with jitter and a circuit breaker that preserves retry budgets. Verified recovery through integration tests that stopped Redis, restarted the API, and killed a worker after a mock email provider accepted a message.",
+    ],
+    links: [],
+    visual: "queue",
+  },
 ];

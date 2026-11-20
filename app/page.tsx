@@ -1,8 +1,8 @@
+import ParticleHero from "./components/particle-hero";
 import HammyInstall from "./components/hammy-install";
 import {
   Navigation,
   MotionLayer,
-  HeroCore,
   Architecture,
   ProjectDemo,
   SkillExplorer,
@@ -47,9 +47,11 @@ function SectionLabel({
   );
 }
 export default function Home() {
-  const ordered = [projects[2], projects[1], projects[0]];
   const stories = [
     {
+      project: projects[2],
+      label: "FLAGSHIP PROJECT",
+      type: "BUSINESS SYSTEMS",
       slug: "buildcore",
       title: "Complex operations.\nClear control.",
       challenge:
@@ -58,6 +60,9 @@ export default function Home() {
         "Role-based access for administrators, supervisors, and engineers, with protected APIs for site operations, inventory, attendance, and documents.",
     },
     {
+      project: projects[1],
+      label: "REAL-TIME COLLABORATION",
+      type: "CONNECTED EXPERIENCES",
       slug: "coop",
       title: "Different places.\nThe same workspace.",
       challenge:
@@ -66,12 +71,26 @@ export default function Home() {
         "Socket.io-based live code synchronization, backed by Express APIs, JWT authentication, and persistent MongoDB storage.",
     },
     {
+      project: projects[0],
+      label: "DEVELOPER TOOLING",
+      type: "AI + PRODUCTIVITY",
       slug: "hammy",
       title: "Your next API call.\nA little smarter.",
       challenge:
         "Moving between API execution, saved requests, and AI-assisted explanations.",
       solution:
         "A modular TypeScript CLI brings HTTP requests, persistent collections, and Groq-powered review into a terminal workflow.",
+    },
+    {
+      project: projects[3],
+      label: "BACKGROUND PROCESSING",
+      type: "DISTRIBUTED SYSTEMS",
+      slug: "scheduler",
+      title: "Keeping jobs safe\nthrough a Redis outage.",
+      challenge:
+        "An API can accept a job just as Redis goes offline. Meanwhile, a client retry can submit the same work twice.",
+      solution:
+        "I stored accepted jobs in a PostgreSQL transactional outbox and used idempotency keys so matching submissions resolve to one job ID.",
     },
   ];
   return (
@@ -82,46 +101,7 @@ export default function Home() {
       <MotionLayer />
       <Navigation />
       <main id="main">
-        <section className="hero shell" id="top">
-          <div className="hero-top mono">
-            <span>TUSHAR MISHRA / DELHI, INDIA</span>
-            <span>
-              <i className="status-dot" /> OPEN TO OPPORTUNITIES
-            </span>
-          </div>
-          <div className="hero-grid">
-            <div className="hero-copy">
-              <p className="role-label">Backend / Full-Stack Developer</p>
-              <h1>
-                Built to work.
-                <br />
-                <span>Engineered</span>
-                <br />
-                to <em>connect.</em>
-              </h1>
-              <p className="intro">
-                I build the systems behind the experience.
-                <br />
-                Dependable APIs, real-time applications, and tools that make
-                developers faster.
-              </p>
-              <div className="hero-actions">
-                <Link href="#work" primary>
-                  Explore my work
-                </Link>
-                <Link href={profile.resume}>View resume</Link>
-              </div>
-            </div>
-            <HeroCore />
-          </div>
-          <div className="hero-bottom mono">
-            <a href="#work">
-              <span className="scroll-icon">↓</span> SCROLL TO EXPLORE
-            </a>
-            <span>THOUGHTFUL INTERFACES. SERIOUS ENGINEERING.</span>
-            <span>PORTFOLIO / 2026</span>
-          </div>
-        </section>
+        <ParticleHero resume={profile.resume} />
         <div className="discipline-strip mono">
           <span>BACKEND ENGINEERING</span>
           <i>✳</i>
@@ -133,7 +113,7 @@ export default function Home() {
         </div>
         <section id="work" className="work-section shell section-space">
           <SectionLabel n="01">
-            SELECTED WORK / THREE DIFFERENT CHALLENGES
+            SELECTED WORK / FOUR DIFFERENT CHALLENGES
           </SectionLabel>
           <div className="section-heading reveal">
             <h2>
@@ -146,33 +126,24 @@ export default function Home() {
               <br />A selection of things I have built.
             </p>
           </div>
-          {ordered.map((project, i) => (
+          {stories.map(({ project, slug, label, type, title, challenge, solution }, i) => (
             <article
-              className={"project project-" + stories[i].slug}
+              className={"project project-" + slug}
               key={project.name}
             >
               <div className="project-heading">
                 <span className="mono muted">
-                  0{i + 1} /{" "}
-                  {i === 0
-                    ? "FLAGSHIP PROJECT"
-                    : i === 1
-                      ? "REAL-TIME COLLABORATION"
-                      : "DEVELOPER TOOLING"}
+                  0{i + 1} / {label}
                 </span>
                 <h3>{project.name}</h3>
                 <span className="project-type mono">
-                  {i === 0
-                    ? "BUSINESS SYSTEMS"
-                    : i === 1
-                      ? "CONNECTED EXPERIENCES"
-                      : "AI + PRODUCTIVITY"}
+                  {type}
                 </span>
               </div>
               <div className="project-grid">
                 <div className="project-story reveal">
                   <h4>
-                    {stories[i].title.split("\n").map((line, j) => (
+                    {title.split("\n").map((line, j) => (
                       <span key={j}>
                         {line}
                         <br />
@@ -187,9 +158,9 @@ export default function Home() {
                   </ul>
                   <div className="contribution">
                     <span className="mono">THE CHALLENGE</span>
-                    <p>{stories[i].challenge}</p>
+                    <p>{challenge}</p>
                     <span className="mono">MY CONTRIBUTION</span>
-                    <p>{stories[i].solution}</p>
+                    <p>{solution}</p>
                   </div>
                   <details>
                     <summary>
@@ -207,17 +178,17 @@ export default function Home() {
                         ))}
                     </ul>
                   </details>
-                  <div className="project-links">
+                  {project.links.length > 0 && <div className="project-links">
                     {project.links.map(([name, url]) => (
                       <Link href={url} key={url}>
                         {name === "GitHub repository" ? "Source code" : name}
                       </Link>
                     ))}
-                  </div>
+                  </div>}
                 </div>
                 <div className="project-visual-stack">
-                  <ProjectDemo type={stories[i].slug} />
-                  {i === 2 && <HammyInstall />}
+                  <ProjectDemo type={slug} />
+                  {slug === "hammy" && <HammyInstall />}
                 </div>
               </div>
             </article>

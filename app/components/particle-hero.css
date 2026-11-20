@@ -1,0 +1,206 @@
+.particle-hero {
+  min-height: calc(100svh - 90px);
+  display: grid;
+  grid-template-rows: auto minmax(230px, 1fr) auto auto;
+}
+.field-header,
+.field-footer,
+.field-info,
+.field-actions,
+.field-switches {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.field-header,
+.field-footer {
+  padding-block: clamp(16px, 2.4vh, 28px);
+  color: var(--muted);
+}
+.field-header > span:last-child {
+  color: var(--lime);
+}
+.field-frame {
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+  background: radial-gradient(ellipse at 55% 50%, #73914313, transparent 66%);
+}
+.field-frame::before,
+.field-frame::after {
+  content: "+";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #717967;
+  font: 14px var(--mono);
+  pointer-events: none;
+}
+.field-frame::after {
+  right: 0;
+}
+.particle-stage {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+.particle-stage canvas {
+  display: block;
+}
+.particle-stage::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150px;
+  height: 150px;
+  transform: translate(
+    calc(var(--px, -200px) - 50%),
+    calc(var(--py, -200px) - 50%)
+  );
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, #d0ed8c17, transparent 65%);
+}
+.field-name {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  text-align: center;
+  font:
+    800 clamp(50px, 10.2vw, 170px)/0.96 Arial,
+    Helvetica,
+    sans-serif;
+  letter-spacing: -0.055em;
+  color: var(--lime);
+  text-transform: uppercase;
+  pointer-events: none;
+}
+.accessible-name {
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.field-info {
+  align-items: flex-end;
+  gap: 24px;
+  padding-block: clamp(16px, 3vh, 36px);
+}
+.field-motto {
+  font-size: clamp(32px, 3.8vw, 64px);
+  font-weight: 600;
+  letter-spacing: -0.065em;
+  line-height: 1.05;
+}
+.field-motto em {
+  color: var(--lime);
+  font-family: Georgia, serif;
+  font-weight: 400;
+}
+.field-intro > p + p {
+  max-width: 48ch;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+  margin-top: 12px;
+}
+.field-actions,
+.field-switches {
+  justify-content: flex-start;
+  gap: 10px;
+}
+.field-actions {
+  margin-top: 18px;
+}
+.field-controls {
+  color: var(--muted);
+  text-align: right;
+}
+.field-switches {
+  margin-top: 10px;
+  justify-content: flex-end;
+}
+.field-switches > div {
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+.field-switches button {
+  background: transparent;
+  color: var(--muted);
+  padding: 10px 16px;
+  border-radius: 2px;
+}
+.field-switches [aria-pressed="true"] {
+  background: var(--lime);
+  color: var(--bg);
+}
+.field-switches .pause-field {
+  border: 1px solid var(--line);
+  min-width: 42px;
+}
+.field-footer {
+  border-top: 1px solid var(--line);
+}
+.field-footer a:last-child {
+  color: var(--ink);
+  font:
+    12px Arial,
+    sans-serif;
+}
+@media (max-width: 849px) {
+  .particle-hero {
+    min-height: calc(100svh - 72px);
+  }
+}
+@media (max-width: 650px) {
+  .particle-hero {
+    grid-template-rows: auto minmax(190px, 1fr) auto auto;
+  }
+  .field-header,
+  .field-footer,
+  .field-controls {
+    font-size: 9px;
+  }
+  .field-info {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 24px;
+  }
+  .field-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    text-align: left;
+  }
+  .field-switches {
+    margin: 0;
+    gap: 4px;
+  }
+  .field-switches button {
+    padding: 10px;
+  }
+  .field-name {
+    font-size: clamp(56px, 17vw, 98px);
+  }
+  .field-intro > p + p {
+    max-width: 43ch;
+    font-size: 14px;
+  }
+}
+@media (max-height: 600px) and (min-width: 651px) {
+  .particle-hero {
+    grid-template-rows: auto minmax(150px, 1fr) auto auto;
+  }
+  .field-info,
+  .field-header,
+  .field-footer {
+    padding-block: 10px;
+  }
+}

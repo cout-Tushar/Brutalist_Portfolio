@@ -148,18 +148,6 @@ summary {
 .menu-toggle {
   display: none;
 }
-.hero {
-  padding-top: 32px;
-}
-.hero-top {
-  display: flex;
-  justify-content: space-between;
-  color: var(--muted);
-  font-size: 9px;
-}
-.hero-top > span:last-child {
-  color: var(--lime);
-}
 .status-dot {
   display: inline-block;
   width: 6px;
@@ -168,48 +156,6 @@ summary {
   border-radius: 50%;
   margin-right: 8px;
   box-shadow: 0 0 12px #c3ec6f44;
-}
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  align-items: center;
-  min-height: 650px;
-  position: relative;
-}
-.hero-copy {
-  z-index: 2;
-  padding: 60px 0;
-}
-.role-label {
-  font-size: 14px;
-  color: var(--orange);
-  margin-bottom: 28px;
-}
-h1 {
-  font-size: clamp(64px, 6.6vw, 108px);
-  line-height: 1.03;
-  letter-spacing: -0.075em;
-  font-weight: 500;
-}
-h1 > span {
-  color: var(--muted);
-}
-h1 em {
-  font-family: Georgia, serif;
-  font-weight: 400;
-  color: var(--lime);
-  letter-spacing: -0.06em;
-}
-.intro {
-  margin-top: 30px;
-  font-size: 15px;
-  line-height: 1.8;
-  color: var(--muted);
-}
-.hero-actions {
-  display: flex;
-  gap: 14px;
-  margin-top: 32px;
 }
 .button {
   display: inline-flex;
@@ -239,29 +185,6 @@ h1 em {
 .button span {
   font-size: 18px;
 }
-.hero-bottom {
-  border-top: 1px solid var(--line);
-  padding: 25px 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: var(--muted);
-  font-size: 9px;
-}
-.hero-bottom a {
-  color: var(--ink);
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
-.scroll-icon {
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  width: 22px;
-  height: 33px;
-  display: grid;
-  place-items: center;
-}
 .discipline-strip {
   padding: 23px 56px;
   border-block: 1px solid var(--line);
@@ -275,111 +198,6 @@ h1 em {
 .discipline-strip i {
   font-style: normal;
   color: var(--lime);
-}
-.core-wrap {
-  height: 560px;
-  position: relative;
-  background: radial-gradient(ellipse at center, #74834912, transparent 65%);
-  min-width: 0;
-}
-.core-coordinate {
-  position: absolute;
-  top: 30px;
-  left: 30px;
-  color: #8c9680;
-  font-size: 9px;
-}
-.webgl-core {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse, #151910 20%, #11131000 65%);
-}
-.webgl-core canvas {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-.core-fallback {
-  position: absolute;
-  inset: 70px 20px;
-  display: grid;
-  place-items: center;
-  perspective: 700px;
-}
-.orbit {
-  position: absolute;
-  width: 75%;
-  aspect-ratio: 1;
-  border: 1px solid #8e674f;
-  border-radius: 50%;
-  transform: rotateX(60deg) rotateZ(30deg);
-}
-.orbit-two {
-  transform: rotateY(65deg) rotateZ(-30deg);
-  border-color: #849960;
-}
-.orbit-three {
-  transform: rotateY(-45deg) rotateX(30deg);
-}
-.core-chip {
-  width: 116px;
-  height: 116px;
-  background: #22291b;
-  border: 1px solid #657547;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  font-family: var(--mono);
-  font-size: 34px;
-  transform: rotate(-15deg);
-  box-shadow:
-    10px 10px 0 #11160d,
-    11px 11px 0 #62704f;
-}
-.core-chip span {
-  font-size: 6px;
-  margin-top: 10px;
-}
-.core-label {
-  position: absolute;
-  pointer-events: none;
-  font-family: var(--mono);
-  font-size: 9px;
-  color: #c2b5a6;
-  background: #151812;
-  border: 1px solid var(--line);
-  padding: 8px 11px;
-}
-.label-api {
-  top: 26%;
-  right: 8%;
-}
-.label-data {
-  bottom: 24%;
-  right: 6%;
-}
-.label-events {
-  top: 52%;
-  left: 0;
-}
-.core-caption {
-  position: absolute;
-  bottom: 5px;
-  left: 20px;
-  right: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 8px;
-  color: var(--muted);
-}
-.core-caption button {
-  background: transparent;
-  border-bottom: 1px solid var(--line);
-  font-family: var(--mono);
-  font-size: 9px;
-  padding: 8px;
 }
 .section-label {
   display: flex;
@@ -1054,9 +872,6 @@ footer {
   font-size: 9px;
 }
 @media (prefers-reduced-motion: no-preference) {
-  .hero-copy {
-    animation: entrance 0.9s cubic-bezier(0.2, 0.7, 0.3, 1) both;
-  }
   .reveal.entered {
     animation: entrance 0.75s cubic-bezier(0.2, 0.7, 0.3, 1) both;
   }
@@ -1074,30 +889,12 @@ footer {
     }
   }
 }
-@media (min-width: 1600px) {
-  .hero-grid {
-    min-height: 720px;
-  }
-  .core-wrap {
-    height: 650px;
-  }
-}
 @media (max-width: 1100px) {
   .shell {
     width: calc(100% - 64px);
   }
   .site-header {
     padding-inline: 32px;
-  }
-  .hero-grid {
-    grid-template-columns: 1.1fr 1fr;
-    min-height: 580px;
-  }
-  h1 {
-    font-size: 68px;
-  }
-  .core-wrap {
-    height: 460px;
   }
   .project-grid {
     gap: 35px;
@@ -1118,9 +915,6 @@ footer {
   .timeline {
     gap: 45px;
   }
-  .hero-bottom > span:nth-child(2) {
-    display: none;
-  }
   .discipline-strip {
     padding-inline: 32px;
     font-size: 8px;
@@ -1135,38 +929,6 @@ footer {
   }
   .site-header {
     height: 72px;
-  }
-  .hero-grid {
-    grid-template-columns: 1fr 0.7fr;
-    min-height: 530px;
-  }
-  h1 {
-    font-size: 60px;
-  }
-  .core-wrap {
-    height: 350px;
-  }
-  .hero-top > span:last-child {
-    display: none;
-  }
-  .hero-copy {
-    padding-block: 45px;
-  }
-  .core-coordinate {
-    left: 0;
-    top: 5px;
-    font-size: 7px;
-  }
-  .core-label {
-    font-size: 7px;
-    padding: 5px;
-  }
-  .core-caption {
-    font-size: 7px;
-    left: 0;
-  }
-  .label-events {
-    left: -5%;
   }
   .project-grid {
     grid-template-columns: 1fr;
@@ -1274,66 +1036,10 @@ footer {
     border: 0;
     padding: 17px 8px;
   }
-  .hero-top {
-    font-size: 8px;
-  }
-  .hero-grid {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .hero-copy {
-    padding: 45px 0 20px;
-  }
-  h1 {
-    font-size: clamp(52px, 12vw, 72px);
-  }
-  .role-label {
-    font-size: 12px;
-    margin-bottom: 22px;
-  }
-  .intro {
-    font-size: 13px;
-    margin-top: 25px;
-  }
-  .intro br {
-    display: none;
-  }
-  .hero-actions {
-    gap: 10px;
-  }
   .button {
     padding: 14px 17px;
     font-size: 11px;
     gap: 20px;
-  }
-  .core-wrap {
-    height: 315px;
-    max-width: 420px;
-    width: 100%;
-    margin: 10px auto 25px;
-  }
-  .core-fallback {
-    inset: 40px 30px;
-  }
-  .core-coordinate {
-    top: 20px;
-    left: 5px;
-  }
-  .core-caption {
-    left: 5px;
-  }
-  .core-chip {
-    width: 90px;
-    height: 90px;
-    font-size: 27px;
-  }
-  .label-events {
-    left: 0;
-  }
-  .hero-bottom {
-    font-size: 8px;
-    padding: 20px 0;
   }
   .discipline-strip {
     padding: 20px;

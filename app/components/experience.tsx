@@ -1,7 +1,5 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import dynamic from "next/dynamic";
-const Core = dynamic(() => import("./system-core"), { ssr: false });
 
 export function Navigation() {
   const [open, setOpen] = useState(false);
@@ -140,47 +138,6 @@ export function MotionLayer() {
     };
   }, []);
   return <div className="scroll-progress" aria-hidden="true" />;
-}
-
-export function HeroCore() {
-  const [enabled, setEnabled] = useState(false);
-  const [paused, setPaused] = useState(false);
-  useEffect(() => {
-    const media = matchMedia(
-      "(min-width: 850px) and (prefers-reduced-motion: no-preference)",
-    );
-    const update = () => setEnabled(media.matches);
-    update();
-    media.addEventListener("change", update);
-    return () => media.removeEventListener("change", update);
-  }, []);
-  return (
-    <div className="core-wrap">
-      <div className="core-coordinate mono">FIG. 01 / CONNECTED SYSTEMS</div>
-      <div className="core-fallback" aria-hidden="true">
-        <div className="orbit orbit-one" />
-        <div className="orbit orbit-two" />
-        <div className="orbit orbit-three" />
-        <div className="core-chip">
-          TM<span>ENGINEERING CORE</span>
-        </div>
-      </div>
-      {enabled && <Core paused={paused} />}
-      <span className="core-label label-api">01 / API</span>
-      <span className="core-label label-data">02 / DATA</span>
-      <span className="core-label label-events">03 / EVENTS</span>
-      <div className="core-caption mono">
-        <span>
-          <i className="status-dot" /> SYSTEMS, CONNECTED.
-        </span>
-        {enabled && (
-          <button onClick={() => setPaused(!paused)} aria-pressed={paused}>
-            {paused ? "Resume motion" : "Pause motion"}
-          </button>
-        )}
-      </div>
-    </div>
-  );
 }
 
 const steps = [
@@ -328,6 +285,22 @@ export function ProjectDemo({ type }: { type: string }) {
           </div>
         </div>
         <span className="demo-badge">INTERFACE ILLUSTRATION / SAMPLE DATA</span>
+      </div>
+    );
+  if (type === "scheduler")
+    return (
+      <div className="product-demo terminal-demo" data-tilt>
+        <div className="window-bar">
+          <span className="window-dots" aria-hidden="true">● ● ●</span>
+          <span>scheduler / job console</span>
+        </div>
+        <div className="terminal-content">
+          <h4>Job history</h4>
+          <div className="erp-row"><span>PDF generation</span><b>Completed</b></div>
+          <div className="erp-row"><span>Email processing</span><b>Retry scheduled</b></div>
+          <div className="erp-row"><span>Video transcoding</span><b>Queued</b></div>
+        </div>
+        <span className="demo-badge">CONSOLE ILLUSTRATION / SAMPLE DATA</span>
       </div>
     );
   if (type === "coop")
