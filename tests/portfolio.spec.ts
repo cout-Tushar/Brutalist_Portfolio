@@ -1,6 +1,51 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
+test.describe("mobile particle controls", () => {
+  test.use({
+    hasTouch: true,
+    isMobile: true,
+    viewport: { width: 320, height: 640 },
+  });
+
+  test("keeps both modes and pause on one tappable row", async ({ page }) => {
+    await page.goto("/");
+    const form = page.getByRole("button", { name: "FORM", exact: true });
+    const drift = page.getByRole("button", { name: "DRIFT", exact: true });
+    const pause = page.getByRole("button", { name: "Pause motion" });
+    for (const width of [320, 360, 390, 430, 844]) {
+      await page.setViewportSize({ width, height: width === 844 ? 390 : 740 });
+      await expect(form).toBeVisible();
+      const boxes = await Promise.all(
+        [form, drift, pause].map(async (button) => {
+          const box = (await button.boundingBox())!;
+          expect(box.width).toBeGreaterThanOrEqual(44);
+          expect(box.height).toBeGreaterThanOrEqual(44);
+          expect(box.x).toBeGreaterThanOrEqual(0);
+          expect(box.x + box.width).toBeLessThanOrEqual(width);
+          return box;
+        }),
+      );
+      for (const [index, box] of boxes.entries()) {
+        expect(
+          Math.abs(box.y + box.height / 2 - boxes[0].y - boxes[0].height / 2),
+        ).toBeLessThan(1);
+        if (index > 0)
+          expect(box.x).toBeGreaterThanOrEqual(
+            boxes[index - 1].x + boxes[index - 1].width,
+          );
+      }
+      await drift.tap();
+      await expect(drift).toHaveAttribute("aria-pressed", "true");
+      await pause.tap();
+      await form.tap();
+      await expect(form).toHaveAttribute("aria-pressed", "true");
+      await expect(drift).toHaveAttribute("aria-pressed", "false");
+      await expect(pause).toBeVisible();
+    }
+  });
+});
+
 test("recruiter content, architecture, and skills stay accessible", async ({
   page,
 }) => {

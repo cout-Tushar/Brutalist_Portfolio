@@ -120,11 +120,16 @@
   color: var(--muted);
   text-align: right;
 }
+.field-touch-hint {
+  display: none;
+}
 .field-switches {
   margin-top: 10px;
   justify-content: flex-end;
 }
 .field-switches > div {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   padding: 3px;
   border: 1px solid var(--line);
   border-radius: 4px;
@@ -142,6 +147,21 @@
 .field-switches .pause-field {
   border: 1px solid var(--line);
   min-width: 42px;
+}
+@media (pointer: coarse) {
+  .field-pointer-hint {
+    display: none;
+  }
+  .field-touch-hint {
+    display: inline;
+  }
+  .field-switches button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .field-switches .pause-field {
+    min-width: 44px;
+  }
 }
 .field-footer {
   border-top: 1px solid var(--line);
@@ -173,18 +193,25 @@
     gap: 24px;
   }
   .field-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
     gap: 8px;
     text-align: left;
   }
   .field-switches {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: stretch;
     margin: 0;
-    gap: 4px;
+    gap: 8px;
   }
   .field-switches button {
-    padding: 10px;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  .field-switches .pause-field {
+    min-width: 48px;
   }
   .field-name {
     font-size: clamp(56px, 17vw, 98px);

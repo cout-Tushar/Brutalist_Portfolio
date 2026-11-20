@@ -88,7 +88,12 @@ export default function ParticleHero({ resume }: { resume: string }) {
         </div>
         {ready && (
           <div className="field-controls mono">
-            <span>MOVE TO PUSH · CLICK TO DETONATE</span>
+            <span className="field-pointer-hint">
+              MOVE TO PUSH · CLICK TO DETONATE
+            </span>
+            <span className="field-touch-hint">
+              DRAG TO PUSH · TAP TO DETONATE
+            </span>
             <div className="field-switches">
               <div role="group" aria-label="Particle mode">
                 <button aria-pressed={!drift} onClick={() => mode(false)}>
