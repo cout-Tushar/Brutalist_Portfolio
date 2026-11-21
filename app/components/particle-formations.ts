@@ -1,4 +1,4 @@
-export const phrases = ["TUSHAR MISHRA", "FULL STACK DEVELOPER", "BUILD."];
+export const phrases = ["TUSHAR MISHRA", "FULL STACK DEVELOPER", "</>"];
 
 export function sampleFormations(width: number, height: number, count: number) {
   const canvas = document.createElement("canvas");
