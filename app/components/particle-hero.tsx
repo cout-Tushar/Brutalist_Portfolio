@@ -65,7 +65,7 @@ export default function ParticleHero({ resume }: { resume: string }) {
           id="hero-name"
           className={ready ? "field-name accessible-name" : "field-name"}
         >
-          Tushar Mishra
+          <span>Tushar <span className="orange">Mishra</span></span>
         </h1>
       </div>
       <div className="field-info">
@@ -100,7 +100,7 @@ export default function ParticleHero({ resume }: { resume: string }) {
                   FORM
                 </button>
                 <button aria-pressed={drift} onClick={() => mode(true)}>
-                  DRIFT
+                  HELIX
                 </button>
               </div>
               <button

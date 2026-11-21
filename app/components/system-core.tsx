@@ -33,21 +33,24 @@ export function createParticleField(
   const velocity = new Float32Array(count * 3);
   const seeds = new Float32Array(count);
   const colors = new Float32Array(count * 3);
-  const orbit = new Float32Array(count * 3);
-  const noise = Float32Array.from({ length: 64 }, () => Math.random() - 0.5);
+  const helix = new Float32Array(count * 3);
   const styles = getComputedStyle(host);
-  const palette = ["--lime", "--lime", "--lime", "--ink", "--muted"].map(
+  const palette = ["--lime", "--lime", "--lime", "--ink", "--muted", "--orange", "--orange"].map(
     (token) => new THREE.Color(styles.getPropertyValue(token).trim()),
   );
   palette.push(palette[0].clone().lerp(palette[4], 0.55));
   for (let i = 0; i < count; i++) {
     seeds[i] = Math.random();
     palette[Math.floor(Math.random() * palette.length)].toArray(colors, i * 3);
-    const angle = Math.random() * 2 * Math.PI;
-    const band = (Math.random() - 0.5) * 0.5;
-    orbit[i * 3] = angle;
-    orbit[i * 3 + 1] = band;
-    orbit[i * 3 + 2] = Math.random() - 0.5;
+    // Sample two opposite strands once so each particle keeps its place as they turn.
+    const along = Math.random() - 0.5;
+    const angle = along * 5 * Math.PI + (i % 2) * Math.PI;
+    const crossAngle = Math.random() * 2 * Math.PI;
+    const thickness = 0.1 * Math.sqrt(Math.random());
+    const radius = 1 + thickness * Math.cos(crossAngle);
+    helix[i * 3] = along + 0.04 * thickness * Math.sin(crossAngle);
+    helix[i * 3 + 1] = radius * Math.cos(angle);
+    helix[i * 3 + 2] = radius * Math.sin(angle);
   }
   const points = new THREE.BufferAttribute(position, 3).setUsage(
     THREE.DynamicDrawUsage,
@@ -60,6 +63,9 @@ export function createParticleField(
     depthWrite: false,
     vertexColors: true,
     uniforms: {
+      helixMode: { value: false },
+      lime: { value: new THREE.Color(styles.getPropertyValue("--lime").trim()) },
+      orange: { value: new THREE.Color(styles.getPropertyValue("--orange").trim()) },
       time: { value: 0 },
       size: { value: 2 },
       dpr: { value: renderer.getPixelRatio() },
@@ -67,6 +73,8 @@ export function createParticleField(
     vertexShader: `
       attribute float seed;
       uniform float time, size, dpr;
+      uniform bool helixMode;
+      uniform vec3 lime, orange;
       varying vec3 tint;
       varying float opacity;
       void main() {
@@ -74,7 +82,8 @@ export function createParticleField(
         p.xy += vec2(sin(time*.68 + seed*103.), cos(time*.54 + seed*91.)) * (.35 + seed*.65);
         gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.);
         gl_PointSize = max(1., dpr * size * (.64 + seed*.84));
-        tint = color;
+        // Vertex parity matches the strand offset used to build the helix.
+        tint = helixMode ? ((gl_VertexID % 2 == 0) ? lime : orange) : color;
         opacity = .48 + seed*.50;
       }`,
     fragmentShader: `
@@ -115,7 +124,7 @@ export function createParticleField(
     width = w;
     height = h;
     formations = sampleFormations(w, h, count);
-    if (initial || paused) position.set(formations[phrase].coords);
+    if (initial || (paused && !drift)) position.set(formations[phrase].coords);
     points.needsUpdate = true;
     Object.assign(camera, {
       left: -w / 2,
@@ -194,31 +203,19 @@ export function createParticleField(
       pull = 43 * dt;
     const radius = Math.min(102, width * 0.17),
       radius2 = radius * radius;
-    const phase = time * 0.26;
+    const rotation = time * 0.45;
+    const cos = Math.cos(rotation), sin = Math.sin(rotation);
+    const coilRadius = Math.min(height * 0.32, width * 0.17);
     for (let i = 0, j = 0; i < active; i++, j += 3) {
       let x = goal[j],
         y = goal[j + 1],
         z = goal[j + 2];
       if (drift) {
-        const a = orbit[j] + phase,
-          band = orbit[j + 1],
-          grain = orbit[j + 2];
-        // Periodic value noise bends adjacent strands together without a seam.
-        const u = (a + band * 0.3) * (64 / (2 * Math.PI));
-        const cell = Math.floor(u),
-          f = u - cell,
-          blend = f * f * (3 - 2 * f);
-        const ripple =
-          noise[cell & 63] * (1 - blend) + noise[(cell + 1) & 63] * blend;
-        const wave = Math.sin(3 * a + phase + band) + ripple * 0.12;
-        const ring =
-          0.71 + 0.23 * Math.cos(3 * a - phase) + 0.2 * band + 0.045 * grain;
-        x = Math.cos(2 * a + band) * ring * width * 0.43;
-        y =
-          (wave * 0.53 + 0.33 * Math.sin(2 * a) + band * 0.6 + grain * 0.07) *
-          height *
-          0.4;
-        z = Math.sin(2 * a + band) * ring * height * 0.35;
+        const radialY = helix[j + 1], radialZ = helix[j + 2];
+        y = coilRadius * (radialY * cos - radialZ * sin);
+        z = coilRadius * (radialY * sin + radialZ * cos);
+        // Angle the coil toward the camera so its winding reads at rest, too.
+        x = helix[j] * width * 0.8 + z * 0.34;
       }
       const dx = position[j] - pointerX,
         dy = position[j + 1] - pointerY;
@@ -324,6 +321,7 @@ export function createParticleField(
     },
     setDrift(value) {
       drift = value;
+      material.uniforms.helixMode.value = value;
     },
   };
 }

@@ -11,13 +11,13 @@ test.describe("mobile particle controls", () => {
   test("keeps both modes and pause on one tappable row", async ({ page }) => {
     await page.goto("/");
     const form = page.getByRole("button", { name: "FORM", exact: true });
-    const drift = page.getByRole("button", { name: "DRIFT", exact: true });
+    const helix = page.getByRole("button", { name: "HELIX", exact: true });
     const pause = page.getByRole("button", { name: "Pause motion" });
     for (const width of [320, 360, 390, 430, 844]) {
       await page.setViewportSize({ width, height: width === 844 ? 390 : 740 });
       await expect(form).toBeVisible();
       const boxes = await Promise.all(
-        [form, drift, pause].map(async (button) => {
+        [form, helix, pause].map(async (button) => {
           const box = (await button.boundingBox())!;
           expect(box.width).toBeGreaterThanOrEqual(44);
           expect(box.height).toBeGreaterThanOrEqual(44);
@@ -35,12 +35,12 @@ test.describe("mobile particle controls", () => {
             boxes[index - 1].x + boxes[index - 1].width,
           );
       }
-      await drift.tap();
-      await expect(drift).toHaveAttribute("aria-pressed", "true");
+      await helix.tap();
+      await expect(helix).toHaveAttribute("aria-pressed", "true");
       await pause.tap();
       await form.tap();
       await expect(form).toHaveAttribute("aria-pressed", "true");
-      await expect(drift).toHaveAttribute("aria-pressed", "false");
+      await expect(helix).toHaveAttribute("aria-pressed", "false");
       await expect(pause).toBeVisible();
     }
   });

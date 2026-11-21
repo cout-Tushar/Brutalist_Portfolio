@@ -61,7 +61,7 @@
   );
   border-radius: 50%;
   pointer-events: none;
-  background: radial-gradient(circle, #d0ed8c17, transparent 65%);
+  background: radial-gradient(circle, color-mix(in srgb, var(--orange) 14%, transparent), transparent 65%);
 }
 .field-name {
   position: absolute;
@@ -97,7 +97,7 @@
   line-height: 1.05;
 }
 .field-motto em {
-  color: var(--lime);
+  color: var(--orange);
   font-family: Georgia, serif;
   font-weight: 400;
 }

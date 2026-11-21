@@ -6,7 +6,7 @@
   --muted: #a2a69a;
   --line: #34382f;
   --lime: #d0ed8c;
-  --orange: #f4a079;
+  --orange: #ff712e;
   --mono: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
 }
 * {
@@ -75,6 +75,8 @@ summary {
 .accent {
   color: var(--lime);
 }
+.section-label .accent,
+footer a,
 .orange {
   color: var(--orange);
 }
@@ -99,7 +101,7 @@ summary {
   top: 0;
   right: 0;
   height: 2px;
-  background: var(--lime);
+  background: linear-gradient(90deg, var(--lime) 65%, var(--orange));
   z-index: 90;
   transform: scaleX(var(--progress, 0));
   transform-origin: left;
@@ -197,7 +199,7 @@ summary {
 }
 .discipline-strip i {
   font-style: normal;
-  color: var(--lime);
+  color: var(--orange);
 }
 .section-label {
   display: flex;
@@ -805,7 +807,7 @@ details li {
   color: var(--muted);
 }
 .contact-section {
-  background: #d0ed8c;
+  background: var(--lime);
   color: #1b2413;
 }
 .contact-section .section-label,
@@ -834,7 +836,7 @@ details li {
   position: absolute;
   right: 5%;
   top: 0;
-  color: #3a5125 !important;
+  color: #943c15;
   font-family: Arial;
   font-weight: 400;
 }
